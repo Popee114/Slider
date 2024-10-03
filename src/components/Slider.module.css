@@ -1,0 +1,10 @@
+.sliderContainer {
+    display: flex;
+}
+
+.sliderItem {
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+}

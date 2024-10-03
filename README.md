@@ -1,2 +1,1 @@
-# Slider
-Slider for react
+Slider for react projects
