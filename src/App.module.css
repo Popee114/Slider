@@ -1,6 +1,9 @@
 .appContainer {
+    display: grid;
+    grid-template-columns: auto 650px auto;
+}
+
+.slider {
     width: 650px;
     height: 370px;
-    border: 3px red solid;
-    margin: 0 auto;
 }

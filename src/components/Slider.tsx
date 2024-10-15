@@ -81,7 +81,8 @@ export const Slider: React.FC<ScliderProps> = ({ sliderItems, screenWidth }) => 
                     className={styles.sliderItem}
                     src={sliderItems[leftImgIndex].image}
                     width={sliderItems[leftImgIndex].width}
-                    height={sliderItems[leftImgIndex].height} />
+                    height={sliderItems[leftImgIndex].height}
+                />
                 <img
                     id={sliderItems[centerImgIndex].id}
                     style={centerImgStyle}
@@ -91,7 +92,8 @@ export const Slider: React.FC<ScliderProps> = ({ sliderItems, screenWidth }) => 
                     className={styles.sliderItem}
                     src={sliderItems[centerImgIndex].image}
                     width={sliderItems[centerImgIndex].width}
-                    height={sliderItems[centerImgIndex].height} />
+                    height={sliderItems[centerImgIndex].height} 
+                    />
                 <img
                     id={sliderItems[rightImgIndex].id}
                     style={rightImgStyle}
@@ -101,54 +103,49 @@ export const Slider: React.FC<ScliderProps> = ({ sliderItems, screenWidth }) => 
                     className={styles.sliderItem}
                     src={sliderItems[rightImgIndex].image}
                     width={sliderItems[rightImgIndex].width}
-                    height={sliderItems[rightImgIndex].height} />
+                    height={sliderItems[rightImgIndex].height}
+                />
             </>
         );
     };
 
     const switchToLeft = (centerImgIndex: number) => {
-        const style = { transition: 'right 0.5s', right: '0px' };
+        const style = { transition: 'left 0.5s', left: '0px' };
 
-        const firstImg = sliderItems[centerImgIndex];
-        const secondImg = sliderItems[imgIndex];
+        const img = sliderItems[centerImgIndex];
 
         setImageIndex(centerImgIndex);
         updateSlider(
-            <>
-                <img
-                    id={firstImg.id}
-                    style={style}
-                    draggable='false'
-                    key={firstImg.id}
-                    alt={firstImg.label}
-                    className={styles.sliderItem}
-                    src={firstImg.image}
-                    width={firstImg.width}
-                    height={firstImg.height} />
-            </>
+            <img
+                id={img.id}
+                style={style}
+                draggable='false'
+                key={img.id}
+                alt={img.label}
+                className={styles.sliderItem}
+                src={img.image}
+                width={img.width}
+                height={img.height} />
         );
     }
 
     const switchToRight = (centerImgIndex: number) => {
-        const style = { transition: 'left 0.5s', left: '0px' };
+        const style = { transition: 'right 0.5s', right: '1px' };
 
-        const firstImg = sliderItems[imgIndex];
-        const secondImg = sliderItems[centerImgIndex];
+        const img = sliderItems[centerImgIndex];
 
         setImageIndex(centerImgIndex);
         updateSlider(
-            <>
-                <img
-                    id={secondImg.id}
-                    style={style}
-                    draggable='false'
-                    key={secondImg.id}
-                    alt={secondImg.label}
-                    className={styles.sliderItem}
-                    src={secondImg.image}
-                    width={secondImg.width}
-                    height={secondImg.height} />
-            </>
+            <img
+                id={img.id}
+                style={style}
+                draggable='false'
+                key={img.id}
+                alt={img.label}
+                className={styles.sliderItem}
+                src={img.image}
+                width={img.width}
+                height={img.height} />
         );
     }
 
@@ -161,12 +158,12 @@ export const Slider: React.FC<ScliderProps> = ({ sliderItems, screenWidth }) => 
                 { left: `${-screenWidth + sideMargin}px` };
         }
         if (mouseMovedDirection === null) {
-            centerImgStyle = { left: `${-screenWidth}px` };
+            centerImgStyle = {};
         }
         if (mouseMovedDirection === true) {
             centerImgStyle = !isMouseDown ?
-                { transition: 'right 0.5s', right: `${screenWidth}px` } :
-                { right: `${screenWidth + sideMargin}px` };
+                { transition: 'right 0.5s', right: `${sideMargin}px` } :
+                { right: `${sideMargin}px` };
         }
 
         return centerImgStyle;
@@ -175,13 +172,13 @@ export const Slider: React.FC<ScliderProps> = ({ sliderItems, screenWidth }) => 
     const generateLeftImgStyle = (sideMargin: number) => {
         return mouseMovedDirection === false ? (!isMouseDown ?
             { transition: 'left 0.5s', left: `${-screenWidth}px` } :
-            { left: `${-screenWidth + sideMargin}px` }) : { left: `${-screenWidth}px` };
+            { left: `${-screenWidth + sideMargin}px` }) : { display: 'none' };
     }
 
     const generateRightImgStyle = (sideMargin: number) => {
         return mouseMovedDirection === true ? (!isMouseDown ?
-            { transition: 'right 0.5s', right: `${screenWidth}px` } :
-            { right: `${screenWidth + sideMargin}px` }) : {};
+            { transition: 'right 0.5s', right: `${sideMargin}px` } :
+            { right: `${sideMargin}px` }) : { display: 'none' };
     }
 
     return sliderItems.length ?
